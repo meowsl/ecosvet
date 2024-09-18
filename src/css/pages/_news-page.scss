@@ -1,7 +1,8 @@
 .news-page{
-  height: 1080px;
+  height: 100vh;
   background-image: url("../assets/images/news-back.svg");
-  background-position: center;
+  background-position: top center;
+  background-size: cover;
   background-repeat: no-repeat;
   &__banner{
     width: 660px;
