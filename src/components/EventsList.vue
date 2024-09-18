@@ -108,12 +108,20 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted, PropType } from 'vue';
 import EventDetail from "./EventDetail.vue";
+import Event from "src/models/event";
 import EventsImg from "../assets/images/events-img.svg"
 import EarthIcon from "../assets/images/earth-icon.svg"
 import ScrollIcon from "../assets/images/scroll-btn.svg"
 const popupVisible = ref<boolean>(false)
+
+defineProps({
+  events:{
+    type: Object as PropType<Event>,
+      required: true
+  }
+})
 
 const scrollToBanner = () => {
   window.scrollTo({

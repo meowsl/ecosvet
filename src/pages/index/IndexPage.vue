@@ -28,7 +28,7 @@
     </div>
   </q-page>
   <div ref="events">
-    <EventsList />
+    <EventsList :events="eventData" />
   </div>
 </template>
 
@@ -41,10 +41,13 @@ import { ref, onMounted } from 'vue'
 import { useAuth } from 'src/composables/useAuth'
 import { isAuthorizedFunc  } from "src/services/isAuth"
 import { useAuthStore } from 'src/stores/auth'
+import { useEvent } from "src/composables/useEvent"
 const { getUserInfo } = useAuth()
 
 const authStore = useAuthStore()
 const isAuthorized  = isAuthorizedFunc()
+const { getEvent } = useEvent()
+const eventData=ref<Event[]>([])
 
 const events = ref<HTMLElement | null>(null)
 
@@ -52,6 +55,9 @@ onMounted(async () => {
   if (authStore.user?.firstName === undefined) {
     authStore.user = await getUserInfo()
   }
+
+  eventData.value = await getEvent()
+  console.log(eventData.value)
 })
 
 const logout = async () => {
