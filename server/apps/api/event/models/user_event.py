@@ -19,6 +19,10 @@ class UserEvent(models.Model):
         related_name="user_event"
     )
 
+    def __str__(self):
+        return f"{self.user} - {self.event}"
+
     class Meta:
         verbose_name = "Мероприятие пользователя"
         verbose_name_plural = "Мероприятия пользователей"
+        unique_together = ("user", "event")

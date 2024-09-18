@@ -4,8 +4,8 @@ from apps.api.auth.models import User
 
 class UserEventSerializer(serializers.ModelSerializer):
 
-    user = serializers.CharField(source="user.username")
-    event = serializers.CharField(source="event.name")
+    user = serializers.CharField(source="user.username", read_only=True)
+    event = serializers.CharField(source="event.name", read_only=True)
 
     class Meta:
         model = UserEvent
