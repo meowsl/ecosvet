@@ -17,12 +17,15 @@
                 <router-link :to="{ name: 'AboutPage' }">
                   О нас
                 </router-link>
-                <q-btn no-caps class="navigation__btn text-white text-subtitle1" @click="alert = true">Войти</q-btn>
+                <q-btn v-if="!isAuthorized" no-caps class="navigation__btn text-white text-subtitle1" @click="authDialog = true">Войти</q-btn>
+                <router-link v-else :to="{ name: 'ProfilePage' }">
+                  <q-btn no-caps class="navigation__btn text-white text-subtitle1">Профиль</q-btn>
+                </router-link>
               </div>
             </q-toolbar>
       </q-header>
 
-      <q-dialog class="auth-dialog" v-model="alert">
+      <q-dialog class="auth-dialog" v-model="authDialog">
         <q-card
           class="auth-dialog__card column justify-center"
           :class="{ 'auth-dialog__card--auth ': isAuth, 'auth-dialog__card--registration': !isAuth }"
@@ -151,16 +154,28 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { useQuasar } from 'quasar'
+import { ref, onMounted, watch } from 'vue'
 import TgIcon from "images/telegram-icon.svg"
-const alert = ref(false)
+import { isAuthorizedFunc  } from "src/services/isAuth"
+import { useAuthStore } from 'src/stores/auth'
+
+const isAuthorized  = isAuthorizedFunc()
+const authStore = useAuthStore()
+const authDialog = ref(false)
 const text = ref('')
+const username = ref('')
 const password = ref('')
 const isPwd = ref(true)
 const isAuth = ref(true)
 
 const onSubmit = async () => {
-  console.log('AAAAAAA')
+  try {
+    await authStore.userLogin(username.value.toLowerCase(), password.value);
+  } catch (error) {
+    console.error(error)
+  }
+
 }
 
 </script>

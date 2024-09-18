@@ -10,6 +10,12 @@
     background-position: bottom center;
     background-size: cover;
     background-repeat: no-repeat;
+    &__auth-data{
+      font-weight: 400;
+      font-size: 28px;
+      line-height: 31px;
+      color: #000000;
+    }
     &__btn{
         background: linear-gradient(90deg, rgba(58,145,129,1) 0%, rgba(39,104,94,1) 100%);
         width: 350px;

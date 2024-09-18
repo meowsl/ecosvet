@@ -41,7 +41,6 @@ export const useAuthStore = defineStore('authStore', {
     },
     async userLogout() {
       localStorage.removeItem('token')
-      this.router.push({ name: 'IndexPage' })
     },
     clear() {
       this.user = null
