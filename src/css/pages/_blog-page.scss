@@ -1,0 +1,26 @@
+.blog-page{
+  padding-top: 100px;
+  min-height: 540px !important;
+  height: 100px;
+  &__banner{
+    background-image: url("../assets/images/blog-back.svg");
+    background-repeat: no-repeat;
+    height: 540px !important;
+    width: 100%;
+  }
+  &__title{
+    font-weight: 600;
+    font-size: 92px;
+    line-height: 101px;
+  }
+  &__text{
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 52px;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.5);
+  }
+  &__title-span{
+    color: #3BC1AD;
+  }
+}
