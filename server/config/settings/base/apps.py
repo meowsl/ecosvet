@@ -27,6 +27,7 @@ PROJECT_APPS = [
     "apps.core.main",
     "apps.core.api",
     "apps.api.auth",
+    "apps.api.event",
 ]
 
 DEVELOPER_APPS = [
