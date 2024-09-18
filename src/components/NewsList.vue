@@ -37,12 +37,12 @@
     transition-hide="slide-down"
     transition-duration="500"
   >
-    <NewDetail/>
+    <NewsDetail/>
   </q-dialog>
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
 import newsImage from "images/news-image.svg"
-import NewDetail from "./NewDetail.vue";
+import NewsDetail from "./NewsDetail.vue";
 const popupVisible = ref<boolean>(false)
 </script>
