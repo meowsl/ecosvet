@@ -88,12 +88,10 @@
         </q-btn>
       </div>
       <div class="row justify-center q-ma-xl absolute-bottom-right">
-        <q-btn flat rounded no-caps class="events__scroll-btn">
-          <a href="#banner">
+        <q-btn flat rounded no-caps class="events__scroll-btn" @click="scrollToBanner">
             <q-avatar size="50px">
               <img :src="ScrollIcon">
             </q-avatar>
-          </a>
         </q-btn>
       </div>
     </div>
@@ -116,4 +114,11 @@ import EventsImg from "../assets/images/events-img.svg"
 import EarthIcon from "../assets/images/earth-icon.svg"
 import ScrollIcon from "../assets/images/scroll-btn.svg"
 const popupVisible = ref<boolean>(false)
+
+const scrollToBanner = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+}
 </script>
