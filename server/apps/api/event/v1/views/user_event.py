@@ -14,3 +14,8 @@ class UserEventRegistrationView(generics.CreateAPIView):
     permission_classes = [AllowAny]
     queryset = Event.objects.all()
     serializer_class = UserEventRegistrationSerializer
+
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context['event'] = self.get_object()
+        return context
