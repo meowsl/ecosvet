@@ -10,7 +10,7 @@ class Event(models.Model):
     """
 
     def upload_path(self, file):
-        return f"{self.name}/{self.image.name}"
+        return f"events/{self.name}/{self.image.name}"
 
     name = models.CharField(
         max_length=127,

@@ -28,6 +28,7 @@ PROJECT_APPS = [
     "apps.core.api",
     "apps.api.auth",
     "apps.api.event",
+    "apps.api.news",
 ]
 
 DEVELOPER_APPS = [
