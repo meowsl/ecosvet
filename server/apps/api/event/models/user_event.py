@@ -1,7 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from apps.api.auth.models import User
-from apps.api.event.models import Event
 
 class UserEvent(models.Model):
 

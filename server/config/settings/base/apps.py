@@ -31,6 +31,7 @@ PROJECT_APPS = [
     "apps.api.news",
     "apps.api.blog",
     "apps.api.reference",
+    "apps.api.moderation",
 ]
 
 DEVELOPER_APPS = [
