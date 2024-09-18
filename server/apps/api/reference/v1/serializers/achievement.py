@@ -5,5 +5,5 @@ from apps.api.reference.models import Achievement
 class AchievementSerializer(serializers.ModelSerializer):
 
     class Meta:
-        models = Achievement
+        model = Achievement
         fields = "__all__"
