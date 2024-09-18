@@ -23,7 +23,8 @@ class Event(models.Model):
 
     image = models.ImageField(
         upload_to=upload_path,
-        verbose_name=_("Картинка мероприятия")
+        verbose_name=_("Картинка мероприятия"),
+        blank=True
     )
 
     date = models.DateTimeField(
@@ -44,7 +45,8 @@ class Event(models.Model):
 
     landmark = models.CharField(
         max_length=100,
-        verbose_name=_("Ориентир")
+        verbose_name=_("Ориентир"),
+        blank=True
     )
 
 

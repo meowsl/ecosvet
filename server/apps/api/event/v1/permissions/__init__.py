@@ -1,0 +1,1 @@
+from .is_event_author import IsEventAuthor

@@ -1,6 +1,8 @@
 from .event import (
     EventAPIListView,
     EventDetailView,
-    UserEventRegistrationAPIView
+    EventCreateView,
+    EventDeleteView,
+    EventUpdateView
 )
 from .user_event import UserEventAPIListView
