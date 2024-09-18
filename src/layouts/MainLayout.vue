@@ -55,7 +55,13 @@
                 <q-card-section class="column justify-center items-center">
                   <div class="">
                     <p class="auth-form__input-label q-ml-lg">Логин</p>
-                    <q-input class="auth-form__input q-mb-md" rounded outlined v-model="username"/>
+                    <q-input 
+                      class="auth-form__input q-mb-md" 
+                      rounded 
+                      outlined 
+                      v-model="username"
+                      :rules="[val => !!val || 'Введите логин!']"
+                    />
                   </div>
                   <div class="auth-form__input-section">
                     <p class="auth-form__input-label q-ml-lg">Пароль</p>
@@ -65,6 +71,7 @@
                       rounded
                       outlined
                       v-model="password"
+                      :rules="[val => !!val || 'Введите пароль!']"
                     >
                       <template v-slot:append>
                         <q-icon
@@ -101,7 +108,7 @@
               class="registration-form"
             >
               <q-form
-                @submit="onSubmit"
+                @submit="applySubmit"
               >
                 <q-card-section>
                   <div class="registration-form__head text-h6 text-center">Регистрация</div>
@@ -110,20 +117,33 @@
                 <q-card-section class="column justify-center items-center">
                   <div class="">
                     <p class="registration-form__input-label q-ml-lg">Ваше имя</p>
-                    <q-input class="registration-form__input q-mb-md" rounded outlined v-model="text"/>
+                    <q-input 
+                      class="registration-form__input" 
+                      rounded 
+                      outlined 
+                      v-model="fullName"
+                      :rules="[val => !!val || 'Поле обязательно для заполнения']"
+                    />
                   </div>
                   <div class="">
                     <p class="registration-form__input-label q-ml-lg">E-mail</p>
-                    <q-input class="registration-form__input q-mb-md" rounded outlined v-model="text"/>
+                    <q-input 
+                      class="registration-form__input" 
+                      rounded 
+                      outlined 
+                      v-model="email"
+                      :rules="[val => !!val || 'Поле обязательно для заполнения', isValidEmail]"
+                    />
                   </div>
                   <div class="">
                     <p class="registration-form__input-label q-ml-lg">Пароль</p>
                     <q-input
-                      class="registration-form__input q-mb-sm"
+                      class="registration-form__input"
                       :type="isPwd ? 'password' : 'text'"
                       rounded
                       outlined
                       v-model="password"
+                      :rules="[val => val.length > 6 || 'Пароль должен состоять из 6 или более символов']"
                     >
                       <template v-slot:append>
                         <q-icon
@@ -167,15 +187,28 @@ import ProfileBtnLeft from "images/profile-btn-left.svg"
 import ProfileBtnRight from "images/profile-btn-right.svg"
 import { isAuthorizedFunc  } from "src/services/isAuth"
 import { useAuthStore } from 'src/stores/auth'
+import { UserReference } from 'src/models/auth'
+import { useAuth } from 'src/composables/useAuth'
 
+const $q = useQuasar()
+
+const { regUser } = useAuth()
 const isAuthorized  = isAuthorizedFunc()
 const authStore = useAuthStore()
 const authDialog = ref(false)
 const text = ref('')
 const username = ref('')
 const password = ref('')
+const fullName = ref('')
+const email = ref('')
 const isPwd = ref(true)
 const isAuth = ref(true)
+
+const isValidEmail = (val: string) => {
+  const emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/;
+  return emailPattern.test(val) || 'Неверный формат email!';
+}
+
 
 const onSubmit = async () => {
   try {
@@ -185,5 +218,41 @@ const onSubmit = async () => {
   }
 
 }
+
+const applySubmit = async () => {
+  if (!fullName.value || !email.value || ! password.value) {
+    // $q.notify({
+    //   type: 'negative',
+    //   message: 'Пожалуйста, заполните все поля!',
+    // });
+    return;
+  }
+  const userData: UserReference = {
+    fullName: fullName.value,
+    email: email.value,
+    password: password.value,
+  };
+  try {
+    const response = await regUser(userData);
+
+    if (response.status !== 201) return;
+    location.reload();
+
+    // $q.notify({
+    //   type: 'positive',
+    //   message: 'Заявка успешно отправлена!',
+    // });
+    // setTimeout(() => {
+    //   isAuth.value = true
+    // }, 1000);
+  } catch (error) {
+    console.error('Error submitting application:', error);
+    // $q.notify({
+    //   type: 'negative',
+    //   message: 'Ошибка при отправке заявки!',
+    // });
+  }
+}
+
 
 </script>

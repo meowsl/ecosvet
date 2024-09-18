@@ -1,4 +1,4 @@
-import { user } from "src/models/auth"
+import { user, UserReference } from "src/models/auth"
 import { api } from "boot/axios"
 
 export const getAuthToken = () => {
@@ -17,8 +17,22 @@ export function useAuth() {
     })
     return response.data
   }
+  const regUser = async (data: UserReference) => {
+    try {
+      const response = await api.post('auth/register/', data, {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+      return response;
+    } catch (error) {
+      console.error('Error uploading application:', error);
+      throw error;
+    }
+  }
 
   return {
     getUserInfo,
+    regUser,
   }
 }

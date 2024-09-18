@@ -31,10 +31,10 @@ export default boot(({ app }) => {
     (error: AxiosError) => {
       if (error.response?.status === 401) {
         authStore.userLogout()
-        Notify.create({
-          type: 'negative',
-          message: 'Пожалуйста, авторизуйтесь снова!'
-        })
+        // Notify.create({
+        //   type: 'negative',
+        //   message: 'Пожалуйста, авторизуйтесь снова!'
+        // })
         return error.response?.status
       }
       return Promise.reject(error)

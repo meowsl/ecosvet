@@ -33,7 +33,7 @@ $transition-duration: 0.5s;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-  &__input{
+  &__input .q-field__inner{
     background: rgba(37, 97, 108, 0.65);
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 125px;

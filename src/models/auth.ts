@@ -7,6 +7,12 @@ export interface user {
   surname?: string | undefined
 }
 
+export interface UserReference {
+  fullName?: string | undefined
+  email?: string | undefined
+  password?: string | undefined
+}
+
 export interface AuthState {
   user: user | null
 }
