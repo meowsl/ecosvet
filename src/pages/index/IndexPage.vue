@@ -22,7 +22,7 @@
       </q-btn>
     </div>
   </q-page>
-  <EventsList/>
+  <EventsList id="#events"/>
 </template>
 
 <script setup lang="ts">

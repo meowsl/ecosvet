@@ -22,7 +22,7 @@
                 <p class="events__main-card__description">Это мероприятие очень крутое правда мы старались всей командой и может у нас и получилось но это не значит что получилось у всех точнее не у каждого</p>
               </q-card-section>
               <q-card-section class="row justify-end">
-                <q-btn class="events__main-card__button" no-caps flat>Подробнее</q-btn>
+                <q-btn class="events__main-card__button" no-caps flat @click="popupVisible = !popupVisible">Подробнее</q-btn>
               </q-card-section>
             </div>
           </q-card-section>
@@ -98,10 +98,22 @@
       </div>
     </div>
   </div>
+  <q-dialog
+    v-model="popupVisible"
+    transition-show="slide-down"
+    transition-hide="slide-down"
+    transition-duration="500"
+  >
+    <EventDetail/>
+  </q-dialog>
+
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
+import EventDetail from "./EventDetail.vue";
 import EventsImg from "../assets/images/events-img.svg"
 import EarthIcon from "../assets/images/earth-icon.svg"
 import ScrollIcon from "../assets/images/scroll-btn.svg"
+const popupVisible = ref<boolean>(false)
 </script>
