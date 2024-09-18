@@ -2,10 +2,11 @@
 @import 'news-page';
 
 .index-page{
-    height: 1080px;
+    height: 100vh;
     width: 100%;
     background-image: url("../assets/images/background.svg");
-    background-position: center;
+    background-position: bottom center;
+    background-size: cover;
     background-repeat: no-repeat;
     &__btn{
         background: linear-gradient(90deg, rgba(58,145,129,1) 0%, rgba(39,104,94,1) 100%);
