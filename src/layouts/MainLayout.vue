@@ -3,7 +3,7 @@
     <q-header class="navigation q-mt-md">
             <q-toolbar class="row justify-center items-center">
               <div
-                class="navigation q-gutter-x-md text-subtitle1 text-weight-medium text-black q-mx-xl"
+                class="navigation q-gutter-x-md text-subtitle1 text-weight-medium text-black q-mr-md"
               >
                 <router-link :to="{ name: 'IndexPage' }">
                   Главная
@@ -17,9 +17,15 @@
                 <router-link :to="{ name: 'AboutPage' }">
                   О нас
                 </router-link>
+              </div>
+              <div class="">
                 <q-btn v-if="!isAuthorized" no-caps class="navigation__btn text-white text-subtitle1" @click="authDialog = true">Войти</q-btn>
-                <router-link v-else :to="{ name: 'ProfilePage' }">
-                  <q-btn no-caps class="navigation__btn text-white text-subtitle1">Профиль</q-btn>
+                <router-link v-else :to="{ name: $route.name === 'ProfilePage' ? 'IndexPage' : 'ProfilePage' }">
+                  <q-btn no-caps :class="{ 'navigation__btn': true, 'profile-btn': $route.name === 'ProfilePage' }" class="text-white text-subtitle1">
+                    <q-img v-if="$route.name === 'ProfilePage'" :src="ProfileBtnLeft" width="18px" height="34px" class="q-ma-sm"/>
+                    {{ $route.name === 'ProfilePage' ? 'Вернуться' : 'Профиль' }}
+                    <q-img v-if="$route.name === 'ProfilePage'" :src="ProfileBtnRight" width="18px" height="34px" class="q-ma-sm"/>
+                  </q-btn>
                 </router-link>
               </div>
             </q-toolbar>
@@ -157,6 +163,8 @@
 import { useQuasar } from 'quasar'
 import { ref, onMounted, watch } from 'vue'
 import TgIcon from "images/telegram-icon.svg"
+import ProfileBtnLeft from "images/profile-btn-left.svg"
+import ProfileBtnRight from "images/profile-btn-right.svg"
 import { isAuthorizedFunc  } from "src/services/isAuth"
 import { useAuthStore } from 'src/stores/auth'
 

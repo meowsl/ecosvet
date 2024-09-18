@@ -1,0 +1,84 @@
+.profile-page{
+    height: 100vh;
+    width: 100%;
+    background-image: url("../assets/images/profile-back.svg");
+    background-position: bottom center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    &__section{
+      width: 1080px;
+      height: 682px;
+    }
+    &__data-card{
+      width: 256px;
+      height: 682px;
+      background: #DEDEDE;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 100px;
+    }
+    &__event-card{
+      width: 810px;
+      height: 682px;
+      background: #DEDEDE;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 100px;
+    }
+    &__level{
+      background: transparent !important;
+    }
+    &__user-data{
+      font-weight: 600;
+      font-size: 26px;
+      line-height: 28px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: #000000;
+    }
+    &__img-section{
+      position: relative;
+    }
+    &__input-section{
+      width: 203px;
+      height: 29px;
+      left: 452px;
+      top: 550px;
+      background: #FFFFFF;
+      border-radius: 25px;
+      margin-bottom: 15px;
+    }
+    &__input-about{
+      width: 203px;
+      height: 55px;
+      left: 452px;
+      top: 550px;
+      background: #FFFFFF;
+      border-radius: 25px;
+      margin-bottom: 15px;
+    }
+    &__label{
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 17px;
+      color: #000000;
+      margin-left: 12px;
+    }
+    &__line{
+      width: 175px;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 25px;
+    }
+    &__achievement-title{
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 17px;
+      color: #00776E;
+    }
+    &__achievement{
+      width: 175px;
+      height: 109px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 25px 25px 125px 125px;
+    }
+}

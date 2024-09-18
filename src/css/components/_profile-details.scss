@@ -1,0 +1,26 @@
+.profile-detail{
+  width: 100%;
+  &__active-tab{
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 31px;
+    color: #006D62;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+  &__tabs{
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 31px;
+    color: #000000;
+  }
+  &__tab-panel{
+    background-color: transparent;
+  }
+  &__line{
+    width: 628px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.5) !important;
+    background-color: black;
+    border-radius: 25px;
+  }
+}
