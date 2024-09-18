@@ -1,0 +1,24 @@
+from django.db import models
+from django.utils.translation import gettext_lazy as _
+from apps.api.auth.models import User
+from apps.api.event.models import Event
+
+class UserEvent(models.Model):
+
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        verbose_name=_("Пользователь"),
+        related_name="user_event"
+    )
+
+    event = models.ForeignKey(
+        Event,
+        on_delete=models.CASCADE,
+        verbose_name=_("Мероприятие"),
+        related_name="user_event"
+    )
+
+    class Meta:
+        verbose_name = "Мероприятие пользователя"
+        verbose_name_plural = "Мероприятия пользователей"
