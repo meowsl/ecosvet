@@ -1,6 +1,6 @@
 <template>
   <q-page class="index-page column justify-center items-center">
-    <div class="column justify-center items-center">
+    <div id="#banner" class="column justify-center items-center">
       <!-- <q-img
           :src="Avatar"
           loading="lazy"
@@ -11,10 +11,10 @@
       /> -->
       <h1 class="index-page__main-head">#ЭКОСВЕТ</h1>
       <h2 class="index-page__head q-mb-md">Первый экологический</h2>
-      <q-btn class="index-page__btn row justify-center items-center">
+      <q-btn no-caps class="index-page__btn row justify-center items-center">
         <p class="text-white">Мероприятия</p>
         <q-img
-          class="q-ml-sm" 
+          class="q-ml-sm"
           :src="Button"
           height="25px"
           width="25px"
@@ -22,10 +22,11 @@
       </q-btn>
     </div>
   </q-page>
+  <EventsList/>
 </template>
 
 <script setup lang="ts">
-import AppExample from 'components/AppExample.vue'
-import Avatar from "images/avatar.png"
-import Button from "images/main_button.png"
+import Avatar from "images/avatar.svg"
+import Button from "images/main_button.svg"
+import EventsList from "src/components/EventsList.vue"
 </script>
