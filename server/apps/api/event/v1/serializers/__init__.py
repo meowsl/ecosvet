@@ -2,4 +2,7 @@ from .event import (
     EventBasicSerializer,
     EventDetailSerializer,
 )
-from .user_event import UserEventSerializer
+from .user_event import (
+    UserEventSerializer,
+    UserEventRegistrationSerializer
+)

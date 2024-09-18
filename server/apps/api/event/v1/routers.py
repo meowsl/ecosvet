@@ -6,7 +6,7 @@ from .views import (
     EventDeleteView,
     EventCreateView,
     UserEventAPIListView,
-
+    UserEventRegistrationView
 )
 
 app_name = "event"
@@ -17,5 +17,6 @@ urlpatterns = [
     path("event/create/", EventCreateView.as_view(), name="event-create"),
     path("event/<int:pk>/update/", EventUpdateView.as_view(), name="event-update"),
     path("event/<int:pk>/delete/", EventDeleteView.as_view(), name="event-delete"),
-    path("user-event/<int:pk>", UserEventAPIListView.as_view(), name="user_event")
+    path("user-event/<int:pk>", UserEventAPIListView.as_view(), name="user_event"),
+    path("event/<int:pk>/register/", UserEventRegistrationView.as_view(), name="event-registration")
 ]
