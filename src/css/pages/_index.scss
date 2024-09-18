@@ -1,13 +1,18 @@
 @charset 'UTF-8';
 
 .index-page{
+    height: 1080px;
+    width: 100%;
+    background-image: url("../assets/images/background.svg");
+    background-position: center;
+    background-repeat: no-repeat;
     &__btn{
         background: linear-gradient(90deg, rgba(58,145,129,1) 0%, rgba(39,104,94,1) 100%);
-        width: 375px;
+        width: 350px;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         border-radius: 50px;
         font-weight: 400;
-        font-size: 30px;
+        font-size: 28px;
         line-height: 52px;
     }
     &__main-head{
