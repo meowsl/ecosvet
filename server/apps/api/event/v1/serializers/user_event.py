@@ -33,4 +33,3 @@ class UserEventRegistrationSerializer(serializers.ModelSerializer):
         event = validated_data['event']
         user_event = UserEvent.objects.create(user=user, event_id=event)
         return validated_data
-
