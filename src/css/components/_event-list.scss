@@ -12,8 +12,9 @@
     background: linear-gradient(90deg, #3A9181 0%, #27685E 100%);
     border-radius: 50px;
     font-weight: 400;
-    font-size: 28px;
+    font-size: 44px;
     line-height: 52px;
+    min-height: 30px !important;
   }
   &__scroll-btn{
     width: 50px;
@@ -22,6 +23,9 @@
   }
   &__head{
     color: #27685E;
+    font-weight: 600;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-size: 72px;
   }
   &__card-line{
     width: 180px;

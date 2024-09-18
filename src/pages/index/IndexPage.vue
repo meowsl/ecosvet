@@ -11,12 +11,12 @@
       /> -->
       <h1 class="index-page__main-head">#ЭКОСВЕТ</h1>
       <h2 class="index-page__head q-mb-md">Первый экологический</h2>
-      <q-btn no-caps class="index-page__btn row justify-center items-center">
+      <q-btn no-caps class="index-page__btn row justify-center items-center q-py-lg">
         <p class="text-white">Мероприятия</p>
         <q-img
           class="q-ml-sm"
           :src="Button"
-          height="25px"
+          height="30px"
           width="25px"
         ></q-img>
       </q-btn>

@@ -1,7 +1,7 @@
 <template>
   <div class="events row justify-center">
     <div class="events__container">
-      <div class="text-h1 q-pt-xl row justify-end q-mr-lg"><span class="events__head">ЭКО</span>-приятия</div>
+      <div class="events__head q-pt-xl row justify-end q-mr-lg">ЭКО<span class="text-black">-приятия</span></div>
       <div class="q-pa-md row items-start q-gutter-lg">
         <q-card class="events__main-card" flat bordered>
           <q-card-section horizontal>
@@ -82,12 +82,12 @@
           <q-img
             class="q-ml-sm"
             :src="EarthIcon"
-            height="25px"
-            width="25px"
+            height="30px"
+            width="30px"
           ></q-img>
         </q-btn>
       </div>
-      <div class="row justify-center q-ma-xl fixed-bottom-right">
+      <div class="row justify-center q-ma-xl absolute-bottom-right">
         <q-btn flat rounded no-caps class="events__scroll-btn">
           <a href="#banner">
             <q-avatar size="50px">

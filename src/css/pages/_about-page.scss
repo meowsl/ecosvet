@@ -1,6 +1,8 @@
 .about-page{
+  height: 100vh;
   &__banner{
-    margin-top: 200px;
+    position: absolute;
+    bottom: 0;
   }
   &__title{
     font-weight: 600;
@@ -20,15 +22,15 @@
 
 .about-title{
   font-weight: 600;
-  font-size: 64px;
+  font-size: 50px;
   line-height: 70px;
   text-align: center;
   color: #378D9A;
-  margin-top: 30px;
+  padding-top: 30px;
 }
 .about-text{
   font-weight: 400;
-  font-size: 42px;
+  font-size: 28px;
   line-height: 46px;
   text-wrap: wrap;
 }
@@ -37,4 +39,7 @@
 }
 .about-container{
   width: 1300px;
+}
+.about-marker{
+  list-style: inside;
 }

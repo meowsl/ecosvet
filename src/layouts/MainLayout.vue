@@ -3,7 +3,7 @@
     <q-header class="navigation q-mt-md">
             <q-toolbar class="row justify-center items-center">
               <div
-                class="navigation q-gutter-x-md text-subtitle1 text-weight-medium text-capitalize text-black q-mx-xl"
+                class="navigation q-gutter-x-md text-subtitle1 text-weight-medium text-black q-mx-xl"
               >
                 <router-link :to="{ name: 'IndexPage' }">
                   Главная
@@ -46,7 +46,7 @@
                 <q-card-section class="column justify-center items-center">
                   <div class="">
                     <p class="auth-form__input-label q-ml-lg">Логин</p>
-                    <q-input class="auth-form__input q-mb-md" rounded outlined v-model="text"/>
+                    <q-input class="auth-form__input q-mb-md" rounded outlined v-model="username"/>
                   </div>
                   <div class="auth-form__input-section">
                     <p class="auth-form__input-label q-ml-lg">Пароль</p>

@@ -30,7 +30,6 @@ PROJECT_APPS = [
     "apps.api.event",
     "apps.api.news",
     "apps.api.blog",
-    "apps.api.reference",
 ]
 
 DEVELOPER_APPS = [

@@ -5,7 +5,4 @@ from .event import (
     EventDeleteView,
     EventUpdateView
 )
-from .user_event import (
-    UserEventAPIListView,
-    UserEventRegistrationView
-)
+from .user_event import UserEventAPIListView

@@ -6,10 +6,10 @@
       <p class="blog-page__title">Блог <span class="blog-page__title-span">#ЭКОСВЕТа</span></p>
       <p class="blog-page__text">Авторские статьи, интервью, отчеты о <br> мероприятиях, обновления и много интересного!</p>
     </div>
-  </q-page>
-  <div class="row justify-center">
+  <div class="row justify-center q-mt-lg">
     <BlogList />
   </div>
+  </q-page>
 </template>
 
 <script setup lang="ts">

@@ -1,12 +1,11 @@
 .blog-page{
-  padding-top: 100px;
-  min-height: 540px !important;
-  height: 100px;
+  padding-top: 90px;
   &__banner{
     background-image: url("../assets/images/blog-back.svg");
+    background-position: bottom center;
+    background-size: cover;
     background-repeat: no-repeat;
-    height: 540px !important;
-    width: 100%;
+    height: 420px !important;
   }
   &__title{
     font-weight: 600;

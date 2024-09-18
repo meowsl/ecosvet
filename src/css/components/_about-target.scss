@@ -1,10 +1,13 @@
 .about-targets{
   overflow-x: hidden;
-  &__title{
-    background-image: url("../assets/images/targets-title-back.svg");
-    background-repeat: no-repeat;
-    width: 884px;
-    height: 158px;
+  background-image: url("../assets/images/targets-title-back.svg");
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: 884px;
+  margin-left: 27px;
+  &__marquee-title{
+    background: #EFEFEF;
+    width: 100%;
   }
 }
 
