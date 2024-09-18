@@ -39,6 +39,22 @@ export const useAuthStore = defineStore('authStore', {
         headers: { Authorization: `Bearer ${token}` },
       })
     },
+    async userTelegramLogin(telegram_id: number, username: string) {
+      await api
+        .post(`/auth/telegram-login/`, { telegram_id: telegram_id, username: username })
+        .then(async e => {
+          const token = e.data.access
+          localStorage.setItem('token', token)
+          const userData = await this.getUserData()
+          this.user = userData.data
+          window.location.reload()
+        })
+        .catch(e => {
+          if (e.response && e.response.status === 401) {
+            console.log('Такого пользователя не существует')
+          }
+        })
+    },
     async userLogout() {
       localStorage.removeItem('token')
     },

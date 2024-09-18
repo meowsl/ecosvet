@@ -5,7 +5,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import Group as BaseGroup
 from django.utils.translation import gettext_lazy as _
 
-from .models import ProxyGroup, User
+from .models import ProxyGroup, User, UserTelegram
 
 
 @admin.register(User)
@@ -60,6 +60,13 @@ class UserAdmin(BaseAdminMixin, BaseUserAdmin):
         "date_joined",
     )
 
+@admin.register(UserTelegram)
+class UserTelegramAdmin(admin.ModelAdmin):
+    """
+    """
+    model = UserTelegram
+    list_display = ("user", "telegram_id")
+    search_fields = ("telegram_id", )
 
 admin.site.unregister(BaseGroup)
 admin.site.register(ProxyGroup, GroupAdmin)

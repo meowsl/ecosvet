@@ -1,4 +1,5 @@
 from .user import (
     UserSerializer,
-    UserRegistrationSerializer
+    UserRegistrationSerializer,
+    TelegramLoginSerializer
 )

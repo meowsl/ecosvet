@@ -40,3 +40,8 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             surname=surname
         )
         return user
+
+
+class TelegramLoginSerializer(serializers.Serializer):
+    telegram_id = serializers.IntegerField(required=True)
+    username = serializers.CharField(max_length=150, required=True)
