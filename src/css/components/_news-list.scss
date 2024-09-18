@@ -1,0 +1,49 @@
+.news-list{
+  position: relative;
+  min-height: 100vh;
+  &__marquee{
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+    background: #76AE9B;
+    font-weight: 400;
+    font-size: 46px;
+    line-height: 50px;
+    color: #F2F2B4;
+  }
+  &__main-card{
+    width: 625px;
+    height: 465px;
+    filter: drop-shadow(0px 0px 10px rgba(28, 66, 59, 0.75));
+    background: rgba(217, 217, 217, 0.75);
+    border-radius: 50px;
+    &__text{
+      font-weight: 600;
+      font-size: 40px;
+      line-height: 44px;
+      color: #000000;
+    }
+  }
+  &__card{
+    width: 625px;
+    height: 220px;
+    filter: drop-shadow(0px 0px 10px rgba(28, 66, 59, 0.75));
+    background: rgba(217, 217, 217, 0.75);
+    border-width: 1px 1px 1px 0px;
+    border-style: solid;
+    border-color: #1C423B;
+    border-radius: 25px 50px 50px 25px;
+    &__title{
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 22px;
+      color: #000000;
+    }
+    &__description{
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 15px;
+      color: #000000;
+    }
+  }
+}
+

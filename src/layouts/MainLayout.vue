@@ -17,7 +17,7 @@
                 <router-link :to="{ name: 'AboutPage' }">
                   О нас
                 </router-link>
-                <q-btn class="navigation__btn text-white text-subtitle1" @click="alert = true">Войти</q-btn>
+                <q-btn no-caps class="navigation__btn text-white text-subtitle1" @click="alert = true">Войти</q-btn>
               </div>
             </q-toolbar>
       </q-header>
