@@ -4,5 +4,6 @@ app_name = "v1"
 
 urlpatterns = [
     path("auth/", include("apps.api.auth.v1")),
-    path("events/", include("apps.api.event.v1"))
+    path("events/", include("apps.api.event.v1")),
+    path("news/", include("apps.api.news.v1")),
 ]

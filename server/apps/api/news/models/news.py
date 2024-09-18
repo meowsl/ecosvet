@@ -8,7 +8,7 @@ class News(models.Model):
     """
 
     def upload_path(self, file):
-        return f"news/{self.name}/{self.image.name}"
+        return f"news/{self.title}/{self.image.name}"
 
     title = models.CharField(
         max_length=127,
@@ -36,7 +36,7 @@ class News(models.Model):
     )
 
     def __str__(self):
-        return self.name
+        return self.title
 
     class Meta:
         ordering = ["-id"]
