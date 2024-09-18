@@ -1,0 +1,18 @@
+[MASTER]
+load-plugins=pylint_django
+ignore-patterns=**/migrations/**/*.py
+
+
+[MESSAGES CONTROL]
+
+disable=missing-module-docstring,
+        fixme,
+        abstract-method,
+        no-self-use,
+        invalid-name,
+        unused-argument,
+        bad-continuation,
+        import-outside-toplevel,
+        arguments-differ,
+        no-member,
+        assignment-from-no-return

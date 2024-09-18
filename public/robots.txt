@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /dj-admin/
+Disallow: /wg-admin/
+Disallow: /sql/
+Disallow: /api/
+Disallow: /media/

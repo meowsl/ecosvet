@@ -1,0 +1,126 @@
+stages:
+  - build
+  - deploy
+
+variables:
+  # Конфиги proxmox
+  PROXMOX_URL: $PROXMOX_URL
+  PROXMOX_PORT: $PROXMOX_PORT
+  PROXMOX_USER: $PROXMOX_USER
+  PROXMOX_PASSWORD: $PROXMOX_PASSWORD
+  PROXMOX_VERIFY_SSL: $PROXMOX_VERIFY_SSL
+  PROXMOX_NODE: $PROXMOX_NODE
+  # Конфиши контейнера
+  CT_HOST: $CT_HOST
+  CT_USER: $CT_USER
+  CT_PASSWORD: $CT_PASSWORD
+  CT_IP: $CT_IP
+  # Сертификаты https
+  HTTPS_CERTIFICATE: $HTTPS_CERTIFICATE
+  HTTPS_PRIVATE_KEY: $HTTPS_PRIVATE_KEY
+  # Конфиги докера
+  CI_REGISTRY: $CI_REGISTRY
+  CI_REGISTRY_USER: $CI_REGISTRY_USER
+  CI_REGISTRY_PASSWORD: $CI_REGISTRY_PASSWORD
+  CI_REGISTRY_IMAGE: $CI_REGISTRY_IMAGE
+  # Базовые конфиги
+  PROJECT_BASE_PATH: "/var/www"
+  SITE_DOMAIN: $SITE_DOMAIN
+  SECRET_KEY: $SECRET_KEY
+  PROJECT_NAME: $PROJECT_NAME
+  DEFAULT_FIXTURES: $DEFAULT_FIXTURES
+  PROJECT_PATH: "$PROJECT_BASE_PATH/$PROJECT_NAME"
+  # Конфиги email
+  EMAIL_PORT: $EMAIL_PORT
+  EMAIL_HOST: $EMAIL_HOST
+  EMAIL_PROTOCOL: $EMAIL_PROTOCOL
+  EMAIL_NAME: $EMAIL_NAME
+  # Конфиги базы данных
+  DB_TYPE: $DB_TYPE
+  DB_HOST: $DB_HOST
+  DB_PORT: $DB_PORT
+  DB_NAME: $DB_NAME
+  DB_USER: $DB_USER
+  DB_PASSWORD: $DB_PASSWORD
+  # Конфиги администратора по умолчанию
+  ADMIN_USERNAME: $ADMIN_USERNAME
+  ADMIN_PASSWORD: $ADMIN_PASSWORD
+  ADMIN_EMAIL: $ADMIN_EMAIL
+  # Конфиги docker volumes
+  DOCKER_DB_DIR: "docker/db"
+  DOCKER_LOG_DIR: "docker/logs"
+  DOCKER_MEDIA_DIR: "docker/media"
+  DOCKER_STATIC_DIR: "docker/static"
+  DOCKER_BACKEND_IMAGE: $CI_REGISTRY_IMAGE:backend
+  DOCKER_FRONTEND_IMAGE: $CI_REGISTRY_IMAGE:frontend
+build:
+  stage: build
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker image build -t $DOCKER_BACKEND_IMAGE -f config/Dockerfile.backend .
+    - docker image build -t $DOCKER_FRONTEND_IMAGE -f config/Dockerfile.frontend .
+    - docker image push $DOCKER_BACKEND_IMAGE
+    - docker image push $DOCKER_FRONTEND_IMAGE
+  when: manual
+  tags:
+    - "production"
+
+deploy:
+  stage: deploy
+  script:
+    # Create project directory
+    - shell-lxc "mkdir -p $PROJECT_PATH"
+    # Create dotenv
+    - cp .env.example .env
+    - dotenv set SITE_DOMAIN $SITE_DOMAIN
+    - dotenv set SECRET_KEY $SECRET_KEY
+    - dotenv set DOCKER_DB_NAME $DB_NAME
+    - dotenv set DOCKER_DB_USER $DB_USER
+    - dotenv set DOCKER_DB_PASSWORD $DB_PASSWORD
+    - dotenv set DATABASE_URL $DB_TYPE://$DB_USER:$DB_PASSWORD@$DB_HOST:$DB_PORT/$DB_NAME
+    - dotenv set DOCKER_LOG_DIR $DOCKER_LOG_DIR
+    - dotenv set DOCKER_MEDIA_DIR $DOCKER_MEDIA_DIR
+    - dotenv set DOCKER_STATIC_DIR $DOCKER_STATIC_DIR
+    - dotenv set DOCKER_DB_DIR $DOCKER_DB_DIR
+    - dotenv set PROJECT_PATH $PROJECT_PATH
+    - dotenv set DOCKER_BACKEND_IMAGE $DOCKER_BACKEND_IMAGE
+    - dotenv set DOCKER_FRONTEND_IMAGE $DOCKER_FRONTEND_IMAGE
+    - dotenv set ADMIN_USERNAME $ADMIN_USERNAME
+    - dotenv set ADMIN_PASSWORD $ADMIN_PASSWORD
+    - dotenv set ADMIN_EMAIL $ADMIN_EMAIL
+    - dotenv set EMAIL_URL $EMAIL_PROTOCOL://$EMAIL_HOST:$EMAIL_PORT
+    - dotenv set EMAIL_NAME $EMAIL_NAME
+    - dotenv set EMAIL_MANAGER $ADMIN_EMAIL
+    # - dotenv set DEFAULT_FIXTURES $DEFAULT_FIXTURES
+    - mv .env config/docker
+    # Copy config files
+    - transport-lxc ./config/docker $PROJECT_PATH
+    # Create logs directory
+    - shell-lxc "mkdir -p $PROJECT_PATH/$DOCKER_LOG_DIR"
+    # Create media directory
+    - shell-lxc "mkdir -p $PROJECT_PATH/$DOCKER_MEDIA_DIR"
+    # Create static directory
+    - shell-lxc "mkdir -p $PROJECT_PATH/$DOCKER_STATIC_DIR"
+    # Create db directory
+    - shell-lxc "mkdir -p $PROJECT_PATH/$DOCKER_DB_DIR"
+    # Create ssl dir
+    - shell-lxc "mkdir -p $PROJECT_PATH/ssl"
+    # Create https certificate file
+    - shell-lxc "echo '$HTTPS_CERTIFICATE' | tee $PROJECT_PATH/ssl/certificate.crt > /dev/null"
+    # Create https private key file
+    - shell-lxc "echo '$HTTPS_PRIVATE_KEY' | tee $PROJECT_PATH/ssl/private_key.key > /dev/null"
+    # Login in docker registry
+    - shell-lxc "docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY"
+    # Pull docker containers
+    - shell-lxc "docker compose --project-directory $PROJECT_PATH pull"
+    # Start/Restart containers
+    - shell-lxc "docker compose --project-directory $PROJECT_PATH up -d"
+  when: on_success
+  needs:
+    - build
+  tags:
+    - "production"
+  artifacts:
+    paths:
+      - config/docker/.env
+    expire_in: 1 hour

@@ -1,0 +1,51 @@
+{% extends "admin_interface:admin/base_site.html" %}
+{% load static i18n %} 
+{% block title %} {{ title }} | {{ site_title|default:_('Django site admin') }}
+{% endblock %} 
+{% block extrahead %}
+{{ block.super }}
+<link
+  rel="icon"
+  type="image/png"
+  href="{% static 'images/logo.png' %}"
+  sizes="48x48"
+/>
+<link
+  rel="stylesheet"
+  href="{% static 'css/plugins/materialdesignicons.min.css' %}"
+/>
+<link rel="stylesheet" href="{% static 'css/admin.css' %}" />
+{% endblock %} {% block branding %}
+<h1 id="site-name">
+  <a href="{% url 'admin:index' %}" class="sidebar-link">
+    <img
+      src="{% static 'images/logo.png' %}"
+      height="70px"
+      style="padding-right: 10px"
+    />
+    <div>
+      <span class="sidebar-link-label">
+        {{ site_header|default:_('Django administration') }}
+      </span>
+    </div>
+  </a>
+</h1>
+{% endblock %} {% block userlinks %}
+<div class="userlinks">
+  {% if user.has_usable_password %}
+  <a class="m-1" href="{% url 'admin:password_change' %}">
+    <i class="mdi mdi-key-change"></i>
+    {% translate 'Change password' %}
+  </a>
+  {% endif %}
+  <a class="m-1" href="{% url 'admin:logout' %}" style="margin-right: 0">
+    <i class="mdi mdi-logout"></i>
+    {% translate 'Log out' %}
+  </a>
+</div>
+{% endblock %}
+{% block nav-global %}
+{% endblock %}
+{% block footer %}
+{{ block.super }}
+{% endblock %}

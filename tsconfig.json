@@ -1,0 +1,20 @@
+{
+    "extends": "@quasar/app-vite/tsconfig-preset",
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "composables": [
+                "./src/composables/index.ts"
+            ],
+            "models": [
+                "src/models/index.ts"
+            ],
+            "images/*": [
+                "./src/assets/images/*"
+            ],
+            "boot/*": [
+                "./src/boot/*"
+            ],
+        }
+    }
+}

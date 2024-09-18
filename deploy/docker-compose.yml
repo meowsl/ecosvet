@@ -1,0 +1,85 @@
+version: '3.7'
+
+services:
+    db:
+        image: postgres:12.0-alpine
+        volumes:
+            - pg-data:/var/lib/postgresql/data/
+        restart: always
+        environment:
+            POSTGRES_DB: ${DOCKER_DB_NAME}
+            POSTGRES_USER: ${DOCKER_DB_USER}
+            POSTGRES_PASSWORD: ${DOCKER_DB_PASSWORD}
+        expose:
+            - 5432
+
+    backend:
+        image: ${DOCKER_BACKEND_IMAGE}
+        command: sh -c "
+            poetry run task collectstatic --clear &&
+            poetry run task migrate &&
+            poetry run task defaultadmin &&
+            poetry run task defaultfixtures &&
+            poetry run task gunicorn"
+        expose:
+            - 8000
+        volumes:
+            - static:/var/www/app/public/static
+            - media:/var/www/app/public/media
+            - logs:/var/www/app/private/logs
+            - ./.env:/var/www/app/.env
+        restart: always
+        depends_on:
+            - db
+
+    frontend:
+        image: ${DOCKER_FRONTEND_IMAGE}
+        command: sh -c "NITRO_PORT=8080 yarn serve"
+        expose:
+            - 8080
+        restart: always
+        depends_on:
+            - backend
+
+    nginx:
+        image: nginx:1.17.6-alpine
+        volumes:
+            - ./nginx.conf:/etc/nginx/nginx.conf
+            - ./robots.txt:/etc/nginx/conf.d/robots.txt
+            - ./ssl/certificate.crt:/var/www/app/public/keys/certificate.crt
+            - ./ssl/private_key.key:/var/www/app/public/keys/private_key.key
+            - static:/var/www/app/public/static
+            - media:/var/www/app/public/media
+            - logs:/var/www/app/private/logs
+        restart: always
+        ports:
+            - 80:80
+            - 443:443
+        depends_on:
+            - frontend
+
+volumes:
+    static:
+        driver: local
+        driver_opts:
+            type: none
+            device: '${PROJECT_PATH}/${DOCKER_STATIC_DIR}'
+            o: bind
+    media:
+        driver: local
+        driver_opts:
+            type: none
+            device: '${PROJECT_PATH}/${DOCKER_MEDIA_DIR}'
+            o: bind
+    pg-data:
+        driver: local
+        driver_opts:
+            type: none
+            device: '${PROJECT_PATH}/${DOCKER_DB_DIR}'
+            o: bind
+    logs:
+        driver: local
+        driver_opts:
+            type: none
+            device: '${PROJECT_PATH}/${DOCKER_LOG_DIR}'
+            o: bind

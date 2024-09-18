@@ -1,0 +1,78 @@
+[tool.poetry]
+name = "nuxt-django"
+version = "0.1.0"
+description = ""
+authors = [""]
+readme = "README.md"
+packages = [{include = "nuxt_django"}]
+
+
+[tool.black]
+line-length = 79
+
+
+[tool.isort]
+multi_line_output = 3
+include_trailing_comma = true
+use_parentheses = true
+line_length = 79
+
+
+[tool.taskipy.tasks]
+manage = "python ./server/manage.py"
+clear = "task manage clear"
+dumpdata = "task manage dump"
+migrate = "task manage migrate --noinput"
+server = "task manage runserver"
+loaddata = "task manage loaddata"
+startapp = "task manage createapp"
+initconfig = "task manage initconfig"
+makemigrations = "task manage makemigrations"
+createsuperuser = "task manage createsuperuser"
+collectstatic = "task manage collectstatic --noinput"
+gunicorn = "gunicorn --timeout 300 --chdir ./server config.wsgi:application -b 0.0.0.0:8000"
+defaultadmin = "task manage defaultadmin"
+defaultfixtures = "task manage defaultfixtures"
+
+
+[tool.poetry.dependencies]
+python = "^3.9"
+django = "^4.2.6"
+pillow = "^10.0.1"
+djangorestframework-camel-case = "^1.4.2"
+py-linq = "^1.4.0"
+django-service-objects = "^0.7.1"
+django-ckeditor = "^6.7.0"
+taskipy = "^1.12.0"
+djangorestframework = "^3.14.0"
+django-cors-headers = "^4.2.0"
+django-import-export = "^3.3.1"
+django-environ = "^0.11.2"
+djangorestframework-simplejwt = "^5.3.0"
+dj-rest-auth = "^5.0.1"
+xlsxwriter = "^3.1.6"
+django-admin-interface = "^0.26.1"
+django-extra-settings = "^0.10.0"
+drf-spectacular-sidecar = "^2023.10.1"
+drf-spectacular = "^0.26.5"
+django-filter = "^23.3"
+django-easy-select2 = "^1.5.8"
+django-admin-sortable2 = "^2.1.10"
+django-apptemplates = "^1.5"
+
+
+[tool.poetry.group.dev.dependencies]
+django-debug-toolbar = "^4.2.0"
+django-extensions = "^3.2.3"
+flake8 = "^6.1.0"
+pyopenssl = "^23.2.0"
+werkzeug = "^3.0.0"
+
+
+[tool.poetry.group.prod.dependencies]
+gunicorn = "^21.2.0"
+psycopg2 = "^2.9.9"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

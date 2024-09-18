@@ -1,0 +1,26 @@
+{% load i18n static %} {% get_current_language as LANGUAGE_CODE %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:'ru' }}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>
+      {% block title %}{% comment %} TODO title {% endcomment %}{% endblock title %}
+    </title>
+    {% block head %} {% block links %} {% endblock links %} {% endblock head %}
+  </head>
+  <body class="lang-{{LANGUAGE_CODE}}">
+    {% csrf_token %}
+    <div class="wrapper">
+      <header class="header">{% block header %} {% endblock header %}</header>
+      <main class="main">{% block content %} {% endblock content %}</main>
+      <footer class="footer">{% block footer %} {% endblock footer %}</footer>
+    </div>
+    {% block bottom %} {% block scripts %} {% endblock scripts %}
+    {% endblock bottom %}
+  </body>
+</html>

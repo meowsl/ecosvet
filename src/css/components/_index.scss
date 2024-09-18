@@ -1,0 +1,18 @@
+@charset 'UTF-8';
+
+.plug{
+  height: 100vh;
+  width: 100%;
+
+  &__info{
+    background: rgb(38,57,107);
+    background: linear-gradient(135deg, rgba(38,57,107,1) 0%, rgb(64, 93, 151) 100%);
+
+    &>.info-project{
+      font-size: clamp(32px, 5vw, 48px);
+    }
+    &>.info-message{
+      font-size: clamp(18px, 5vw, 34px);
+    }
+  }
+}
