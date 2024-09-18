@@ -46,3 +46,30 @@
   'Montserrat/Montserrat-Black.ttf',
   $weight: 900
 );
+
+
+@include font-face(
+  'AristaPro',
+  'AristaPro/AristaPro-Thin.ttf',
+  $weight: 100
+);
+@include font-face(
+  'AristaPro',
+  'AristaPro/AristaPro-Light.ttf',
+  $weight: 300
+);
+@include font-face(
+  'AristaPro',
+  'AristaPro/AristaPro-Regular.ttf',
+  $weight: 400
+);
+@include font-face(
+  'AristaPro',
+  'AristaPro/AristaPro-SemiBold.ttf',
+  $weight: 600
+);
+@include font-face(
+  'AristaPro',
+  'AristaPro/AristaPro-Bold.ttf',
+  $weight: 700
+);
