@@ -34,7 +34,7 @@ REST_FRAMEWORK = {
 CORS_ALLOW_CREDENTIALS = True
 
 if env("DEBUG"):
-    CORS_ALLOWED_ORIGINS = ("https://localhost:8080",)
+    CORS_ALLOWED_ORIGINS = ("https://localhost:8080", "http://localhost:8080")
 else:
     CORS_ALLOWED_ORIGINS = list(
         map(lambda d: f"https://{str.strip(d)}", env("SITE_DOMAIN").split(","))

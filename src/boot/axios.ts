@@ -1,36 +1,45 @@
 import { boot } from 'quasar/wrappers'
-import axios, { AxiosInstance } from 'axios'
+import axios, { AxiosInstance, AxiosResponse, AxiosError } from 'axios'
+import { useAuthStore } from 'src/stores/auth'
+import { Notify } from 'quasar'
+import { getAuthToken } from 'src/composables/useAuth'
 
 declare module '@vue/runtime-core' {
-    interface ComponentCustomProperties {
-        $axios: AxiosInstance
-        $api: AxiosInstance
-    }
+  interface ComponentCustomProperties {
+    $axios: AxiosInstance
+    $api: AxiosInstance
+  }
 }
 
-// Be careful when using SSR for cross-request state pollution
-// due to creating a Singleton instance here;
-// If any client changes this (global) instance, it might be a
-// good idea to move this instance creation inside of the
-// "export default () => {}" function below (which runs individually
-// for each client)
-
 const api = axios.create({
-    baseURL: process.env.DEV ? 'http://localhost:8000/api/v1/' : '/api/v1/',
-    withCredentials: true,
-    headers: { 'Content-Type': 'application/json' },
+  baseURL: process.env.DEV ? 'http://localhost:8000/api/v1/' : '/api/v1/',
+  withCredentials: true,
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': getAuthToken()
+  },
 })
 
 export default boot(({ app }) => {
-    // for use inside Vue files (Options API) through this.$axios and this.$api
-
-    app.config.globalProperties.$axios = axios
-    // ^ ^ ^ this will allow you to use this.$axios (for Vue Options API form)
-    //       so you won't necessarily have to import axios in each vue file
-
-    app.config.globalProperties.$api = api
-    // ^ ^ ^ this will allow you to use this.$api (for Vue Options API form)
-    //       so you can easily perform requests against your app's API
+  const authStore = useAuthStore()
+  app.config.globalProperties.$axios = axios
+  app.config.globalProperties.$api = api
+  api.interceptors.response.use(
+    (response: AxiosResponse) => {
+      return response
+    },
+    (error: AxiosError) => {
+      if (error.response?.status === 401) {
+        authStore.userLogout()
+        Notify.create({
+          type: 'negative',
+          message: 'Пожалуйста, авторизуйтесь снова!'
+        })
+        return error.response?.status
+      }
+      return Promise.reject(error)
+    },
+  )
 })
 
 export { api }

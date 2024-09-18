@@ -4,13 +4,15 @@
     <q-img class="absolute-right" :src="foliageRight" height="360px" width="540px"/>
     <div class="news-page__banner col-9 q-mb-xl">
       <div class="">Последние новости <br> <span class="news-page__head">экологического</span> <br> сообщества</div>
-      <q-btn no-caps class="news-page__btn">
+      <q-btn no-caps class="news-page__btn" @click="scrollToNews">
         <p>Перейти</p>
         <q-img class="q-ml-md" :src="newsIcon" width="35px" height="35px"></q-img>
       </q-btn>
     </div>
   </q-page>
-  <NewsList />
+  <div ref="news">
+    <NewsList />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -19,4 +21,11 @@ import foliageLeft from "images/foliage-left.svg"
 import foliageRight from "images/foliage-right.svg"
 import newsIcon from "images/news-icon.svg"
 import NewsList from "src/components/NewsList.vue"
+const news = ref<HTMLElement | null>(null)
+
+const scrollToNews = () => {
+  if (news.value) {
+    news.value.scrollIntoView({ behavior: 'smooth' });
+  }
+}
 </script>
