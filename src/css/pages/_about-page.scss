@@ -1,0 +1,40 @@
+.about-page{
+  &__banner{
+    margin-top: 200px;
+  }
+  &__title{
+    font-weight: 600;
+    font-size: 72px;
+    line-height: 79px;
+  }
+  &__title-span{
+    color: #1CA79F;
+  }
+  &__under-title{
+    font-weight: 300;
+    font-size: 36px;
+    line-height: 39px;
+    text-align: center;
+  }
+}
+
+.about-title{
+  font-weight: 600;
+  font-size: 64px;
+  line-height: 70px;
+  text-align: center;
+  color: #378D9A;
+  margin-top: 30px;
+}
+.about-text{
+  font-weight: 400;
+  font-size: 42px;
+  line-height: 46px;
+  text-wrap: wrap;
+}
+.about-span{
+  color: #27685E;
+}
+.about-container{
+  width: 1300px;
+}
