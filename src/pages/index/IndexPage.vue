@@ -72,7 +72,6 @@ onMounted(async () => {
   }
 
   eventData.value = await getEvent()
-  console.log(eventData.value)
 })
 
 const logout = async () => {

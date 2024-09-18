@@ -1,5 +1,5 @@
 import { api } from "boot/axios"
-import { Event } from "models"
+import { Event, EventDetail } from "models"
 
 export function useEvent() {
   const getEvent = async () => {
@@ -7,7 +7,17 @@ export function useEvent() {
     })
     return response.data
   };
+  const getEventDetail = async (eventId: number | undefined) => {
+    try {
+      const response = await api.get<EventDetail>(`events/event/${eventId}`);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  };
+
   return{
-    getEvent
+    getEvent,
+    getEventDetail
   }
 }

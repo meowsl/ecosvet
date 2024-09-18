@@ -24,7 +24,7 @@
                 <p class="events__main-card__description">{{ event.description }}</p>
               </q-card-section>
               <q-card-section class="row justify-end">
-                <q-btn class="events__main-card__button" no-caps flat @click="popupVisible = !popupVisible">Подробнее</q-btn>
+                <q-btn class="events__main-card__button" no-caps flat @click="openPopup(event.id)">Подробнее</q-btn>
               </q-card-section>
             </div>
           </q-card-section>
@@ -49,7 +49,7 @@
                 <p class="events__card__description">{{ event.description }}</p>
               </div>
               <div class="events__card__btn row justify-center">
-                <q-btn no-caps flat>Подробнее</q-btn>
+                <q-btn no-caps flat @click="openPopup(event.id)">Подробнее</q-btn>
               </div>
             </div>
           </q-card-section>
@@ -82,22 +82,27 @@
     transition-hide="slide-down"
     transition-duration="500"
   >
-    <EventDetail/>
+    <EventDetail :event="eventDetailData"/>
   </q-dialog>
 
 </template>
 
 <script setup lang="ts">
-import { ref,PropType } from 'vue';
+import { ref, PropType, onMounted } from 'vue';
 import EventDetail from "./EventDetail.vue";
 import { Event } from "src/models/event";
 import EventsImg from "../assets/images/events-img.svg"
 import EarthIcon from "../assets/images/earth-icon.svg"
 import ScrollIcon from "../assets/images/scroll-btn.svg"
+import { useEvent } from 'src/composables/useEvent'
+
 const popupVisible = ref<boolean>(false)
+const selectedEventId = ref<number | null>(null);
+const { getEventDetail } = useEvent()
+const eventDetailData = ref<Event | null>(null);
 
 const props = defineProps({
-  events:{
+  events:{  
     type: Array as PropType<Event[]>,
     required: true
   }
@@ -108,5 +113,14 @@ const scrollToBanner = () => {
     top: 0,
     behavior: 'smooth'
   });
+}
+
+const openPopup = async (eventId: number) => {
+  if (eventId !== undefined) {
+    selectedEventId.value = eventId;
+    const eventDetail = await getEventDetail(eventId)
+    eventDetailData.value = eventDetail
+    popupVisible.value = true;
+  }
 }
 </script>
