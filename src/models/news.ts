@@ -4,3 +4,8 @@ export interface News {
     text: string | undefined
     image: string | undefined
   }
+export interface NewsDetail {
+    news: News
+    publishedDate: string | undefined
+    updatedDate: string | undefined
+  }
