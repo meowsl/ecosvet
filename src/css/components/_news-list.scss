@@ -35,6 +35,8 @@
     border-style: solid;
     border-color: #1C423B;
     border-radius: 25px 50px 50px 25px;
+
+    display: flex;
     &__title{
       font-weight: 600;
       font-size: 20px;
@@ -51,9 +53,26 @@
       text-overflow: ellipsis;
       width: 300px;
       display: -webkit-box;
-      -webkit-line-clamp: 8; 
+      -webkit-line-clamp: 8;
       -webkit-box-orient: vertical;
     }
   }
 }
 
+.news-list__container.d-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "main side"
+    "main side";
+  gap: 20px;
+}
+
+.news-list__main-card {
+  grid-area: main;
+}
+
+.d-flex.flex-column {
+  grid-area: side;
+}
