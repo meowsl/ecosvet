@@ -5,7 +5,7 @@ from django.core.mail import send_mail
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-# from apps.api.reference.models import Achievement
+from apps.api.reference.models import Achievement
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -69,13 +69,13 @@ class User(AbstractBaseUser, PermissionsMixin):
         default=timezone.now
     )
 
-    # achievement = models.ForeignKey(
-    #     Achievement,
-    #     verbose_name=_("Достижение пользователя"),
-    #     on_delete=models.CASCADE,
-    #     blank=True,
-    #     default="No achievements"
-    # )
+    achievement = models.ForeignKey(
+        Achievement,
+        verbose_name=_("Достижение пользователя"),
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True
+    )
 
     objects = UserManager()
 

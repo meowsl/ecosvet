@@ -5,6 +5,8 @@ from django.contrib.admin import (
     TabularInline,
     action
 )
+from django.contrib import messages
+from django.http import HttpResponseRedirect
 from .models import (
     Application,
     Archive
@@ -36,8 +38,6 @@ class ApplicationAdmin(ModelAdmin):
         return qs.filter(archive__isnull=True)
 
     def create_model(self, model, data):
-        if model == User:
-            data['password'] = make_password(data['password'])
 
         model.objects.create(
             **data
