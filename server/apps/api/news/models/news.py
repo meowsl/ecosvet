@@ -8,7 +8,7 @@ class News(models.Model):
     """
 
     def upload_path(self, file):
-        return f"news/{self.title}/{self.image.name}"
+        return f"news/{self.image.name}"
 
     title = models.CharField(
         max_length=524,
