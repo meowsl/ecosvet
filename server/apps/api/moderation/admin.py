@@ -9,6 +9,7 @@ from .models import (
     Application,
     Archive
 )
+from apps.api.event.models import Event
 
 # Register your models here.
 @register(Archive)
@@ -24,7 +25,7 @@ class ApplicationAdmin(ModelAdmin):
     Представление заявки на участие
     """
 
-    list_display = ("last_name", "first_name", "surname")
+    list_display = ("name", "date", "author")
     actions = ["approve_applications", "reject_applications"]
 
     project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
@@ -46,14 +47,15 @@ class ApplicationAdmin(ModelAdmin):
     def approve_applications(self, request, queryset):
         for application in queryset:
             self.create_model(
-                model=User,
+                model=Event,
                 data={
-                    "last_name": application.last_name,
-                    "first_name": application.first_name,
-                    "surname": application.surname,
-                    "email": application.email,
-                    "username": application.email,
-                    "password":  application.password,
+                    "name": application.name,
+                    "description": application.description,
+                    "image": application.image,
+                    "date": application.date,
+                    "author": application.author,
+                    "address":  application.address,
+                    "landmark": application.landmark
                 }
             )
 
@@ -67,7 +69,7 @@ class ApplicationAdmin(ModelAdmin):
             )
 
             application.save()
-            messages.success(request, f'{application.last_name} {application.first_name} {application.surname} was approved.')
+            messages.success(request, f'{application.name}, {application.author} was approved.')
         return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
     @action(description="Отклонить все")
@@ -83,20 +85,21 @@ class ApplicationAdmin(ModelAdmin):
             )
 
             application.save()
-            messages.success(request, f'{application.last_name} {application.first_name} {application.surname} was rejected.')
+            messages.success(request, f'{application.name} {application.author} was rejected.')
         return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
     def response_change(self, request, obj):
         if '_approve' in request.POST:
             self.create_model(
-                model=User,
+                model=Event,
                 data={
-                    "last_name": obj.last_name,
-                    "first_name": obj.first_name,
-                    "surname": obj.surname,
-                    "email": obj.email,
-                    "username": obj.email,
-                    "password":  obj.password,
+                    "name": obj.name,
+                    "description": obj.description,
+                    "image": obj.image,
+                    "date": obj.date,
+                    "author": obj.author,
+                    "address":  obj.address,
+                    "landmark": obj.landmark
                 }
             )
 
@@ -109,7 +112,7 @@ class ApplicationAdmin(ModelAdmin):
             )
 
             obj.save()
-            messages.success(request, f'{obj.last_name} {obj.first_name} {obj.surname} was approved.')
+            messages.success(request, f'{obj.name} {obj.author} was approved.')
             return HttpResponseRedirect(request.META['HTTP_REFERER'])
         elif '_reject' in request.POST:
             self.create_model(
@@ -121,7 +124,7 @@ class ApplicationAdmin(ModelAdmin):
             )
 
             obj.save()
-            messages.success(request, f'{obj.last_name} {obj.first_name} {obj.surname} was rejected.')
+            messages.success(request, f'{obj.name} {obj.author} was rejected.')
             return HttpResponseRedirect(request.META['HTTP_REFERER'])
         else:
             return super().response_change(request, obj)

@@ -35,7 +35,6 @@ class Event(models.Model):
         User,
         verbose_name=_("Автор"),
         on_delete=models.CASCADE,
-        related_name="event"
     )
 
     address = models.CharField(

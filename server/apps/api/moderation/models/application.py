@@ -1,39 +1,56 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from apps.api.auth.models import User
 
 
 class Application(models.Model):
     """
     Заявка
     """
-    username = models.CharField(_("Имя пользователя"), max_length=100)
+    def upload_path(self, file):
+        return f"events/{self.name}/{self.image.name}"
 
-    first_name = models.CharField(_("Имя"), max_length=30)
-
-    last_name = models.CharField(_("Фамилия"), max_length=150)
-
-    surname = models.CharField(
-        _("Отчество"),
-        max_length=150,
-        blank=True,
-        null=True
+    name = models.CharField(
+        max_length=127,
+        verbose_name=_("Название мероприятия")
     )
 
-    email = models.EmailField(verbose_name=_("e-mail"))
+    description = models.TextField(
+        verbose_name=_("Описание")
+    )
 
-    password = models.CharField(
-        max_length=128,
-        blank=True,
-        null=True,
-        verbose_name=_("Новый пароль участника")
+    image = models.ImageField(
+        upload_to=upload_path,
+        verbose_name=_("Картинка мероприятия"),
+        blank=True
+    )
+
+    date = models.DateTimeField(
+        verbose_name=_("Дата мероприятия")
+    )
+
+    author = models.ForeignKey(
+        User,
+        verbose_name=_("Автор"),
+        on_delete=models.CASCADE,
+    )
+
+    address = models.CharField(
+        max_length=64,
+        verbose_name=_("Адрес мероприятия")
+    )
+
+    landmark = models.CharField(
+        max_length=100,
+        verbose_name=_("Ориентир"),
+        blank=True
     )
 
     def __str__(self):
-        if self.surname:
-            return f"{self.last_name} {self.first_name[0]}. {self.surname[0]}."
-        else:
-            return f"{self.last_name} {self.first_name[0]}."
+        return f"{self.name}, {self.author}"
+
+
 
     class Meta:
-        verbose_name = _("Заявка на участие")
-        verbose_name_plural = _("Заявки на участие")
+        verbose_name = _("Заявка на мероприятие")
+        verbose_name_plural = _("Заявки на мероприятие")
