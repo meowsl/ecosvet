@@ -4,4 +4,5 @@ export interface Post {
   text: string | undefined,
   contentType: string | undefined,
   image: string | undefined,
+  publishDate: string | undefined | Date
 }
