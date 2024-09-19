@@ -1,16 +1,28 @@
 <template>
   <div class="news-detail q-pa-xl">
     <q-card-section class="absolute-right">
-      <q-btn icon="close" flat round dense v-close-popup />
+      <q-btn
+        icon="close"
+        flat
+        round
+        dense
+        v-close-popup
+      />
     </q-card-section>
     <div class="">
-      <q-img :src="news.image" width="915px" height="340px" fit="contain" class="news-detail__img q-mb-lg"></q-img>
+      <q-img
+        :src="news.image"
+        width="100%"
+        height="400px"
+        fit="cover"
+        class="news-detail__img q-mb-lg"
+      ></q-img>
       <p class="news-detail__title q-mb-sm">{{ news.title }}</p>
-      <p class="news-detail__date">Дата: {{news.publishDate}} г.</p>
+      <p class="news-detail__date">Дата: {{ news.publishDate }} г.</p>
     </div>
     <div class="news-detail__description">
-      <q-separator class="event-detail__line q-my-md"/>
-      <p>{{news.text}} </p>
+      <q-separator class="event-detail__line q-my-md" />
+      <p>{{ news.text }} </p>
     </div>
   </div>
 </template>

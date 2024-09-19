@@ -42,6 +42,7 @@
       font-size: 20px;
       line-height: 22px;
       color: #000000;
+
     }
     &__description{
       font-weight: 400;
@@ -71,6 +72,12 @@
 
 .news-list__main-card {
   grid-area: main;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+
 }
 
 .d-flex.flex-column {

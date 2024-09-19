@@ -4,15 +4,40 @@
     <h3 class="news-list__marquee absolute-right text-center">Экологически чистые новости планеты</h3>
     <div class="news-list__container column align-center">
       <div class="row q-gutter-lg q-mb-md">
-        <div class="news-list__main-card cursor-pointer" @click="openPopup(props.news[0]?.id)">
-          <q-img :src="props.news[0]?.image" width="625px" height="350px" fit="contain"></q-img>
-          <div class="news-list__main-card__text q-pa-md">{{props.news[0]?.title}}</div>
+        <div
+          class="news-list__main-card cursor-pointer"
+          @click="openPopup(props.news[0]?.id)"
+        >
+          <q-img
+            :src="props.news[0]?.image"
+            width="625px"
+            height="350px"
+            fit="cover"
+            style="border-radius: 25px !important;"
+          ></q-img>
+          <div class="news-list__main-card__text q-pa-md">{{ props.news[0]?.title }}</div>
         </div>
         <div class="column">
-          <div class="q-mb-md" v-for="newsItem in props.news.slice(1, 3)" :key="newsItem.id">
-            <q-card class="news-list__card cursor-pointer q-mb-md" clickable @click="openPopup(newsItem.id)">
+          <div
+            class="q-mb-md"
+            v-for="newsItem in props.news.slice(1, 3)"
+            :key="newsItem.id"
+          >
+            <q-card
+              class="news-list__card cursor-pointer q-mb-md"
+              clickable
+              @click="openPopup(newsItem.id)"
+            >
               <q-card-section horizontal>
-                <q-img :src="newsItem.image" width="295px" height="218px" fit="contain"></q-img>
+                <div>
+                  <q-img
+                    :src="newsItem.image"
+                    width="295px"
+                    height="218px"
+                    fit="cover"
+                    style="border-radius: 25px !important;"
+                  ></q-img>
+                </div>
                 <div class="column q-ma-md">
                   <div class="news-list__card__title q-mb-md">{{ newsItem.title }}</div>
                   <div class="news-list__card__description">{{ newsItem.text }}</div>
@@ -23,10 +48,25 @@
         </div>
       </div>
       <div class="row q-gutter-md">
-        <div v-for="newsItem in props.news.slice(3)" :key="newsItem.id">
-          <q-card class="news-list__card cursor-pointer" clickable @click="openPopup(newsItem.id)">
+        <div
+          v-for="newsItem in props.news.slice(3)"
+          :key="newsItem.id"
+        >
+          <q-card
+            class="news-list__card cursor-pointer"
+            clickable
+            @click="openPopup(newsItem.id)"
+          >
             <q-card-section horizontal>
-              <q-img :src="newsItem.image" width="295px" height="218px" fit="contain"></q-img>
+              <div style="border-radius: 25px !important;">
+                <q-img
+                  :src="newsItem.image"
+                  width="295px"
+                  height="218px"
+                  fit="cover"
+                  style="border-radius: 25px !important;"
+                />
+              </div>
               <div class="column q-ma-md">
                 <div class="news-list__card__title q-mb-md">{{ newsItem.title }}</div>
                 <div class="news-list__card__description">{{ newsItem.text }}</div>
@@ -43,7 +83,7 @@
     transition-hide="slide-down"
     transition-duration="500"
   >
-    <NewsDetail :news="newsDetailData"/>
+    <NewsDetail :news="newsDetailData" />
   </q-dialog>
 </template>
 <script setup lang="ts">
@@ -58,7 +98,7 @@ const { getNewsDetail } = useNews()
 const newsDetailData = ref<News | null>(null);
 
 const props = defineProps({
-  news:{
+  news: {
     type: Array as PropType<News[]>,
     required: true
   }
