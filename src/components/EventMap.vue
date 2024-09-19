@@ -70,7 +70,6 @@ async function initMap() {
   const eventCoord = new Map();
   try {
     const coords: LngLat | null = await geocodeAddress(props.address);
-    alert(coords)
     if (coords) {
       markerInfo.value = {
         coordinates: coords,
