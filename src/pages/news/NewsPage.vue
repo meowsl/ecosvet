@@ -11,21 +11,32 @@
     </div>
   </q-page>
   <div ref="news">
-    <NewsList />
+    <NewsList :news="newsData"/>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import foliageLeft from "images/foliage-left.svg"
 import foliageRight from "images/foliage-right.svg"
 import newsIcon from "images/news-icon.svg"
 import NewsList from "src/components/NewsList.vue"
+import { News } from "src/models/news";
+import { useNews } from 'src/composables/useNews'
 const news = ref<HTMLElement | null>(null)
+const newsData = ref<News[]>([])
+
+const { getNews } = useNews()
 
 const scrollToNews = () => {
   if (news.value) {
     news.value.scrollIntoView({ behavior: 'smooth' });
   }
 }
+
+const events = ref<HTMLElement | null>(null)
+
+onMounted(async () => {
+  newsData.value = await getNews()
+})
 </script>

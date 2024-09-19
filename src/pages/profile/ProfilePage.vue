@@ -51,7 +51,6 @@ const authStore = useAuthStore()
 onMounted(async () => {
   if (authStore.user?.firstName === undefined) {
     authStore.user = await getUserInfo()
-    console.log(authStore.user)
   }
 })
 </script>

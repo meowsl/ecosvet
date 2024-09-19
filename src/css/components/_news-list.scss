@@ -1,6 +1,9 @@
 .news-list{
   position: relative;
   min-height: 100vh;
+  &__container{
+    width: 1400px;
+  }
   &__marquee{
     writing-mode: vertical-lr;
     text-orientation: mixed;
@@ -43,6 +46,13 @@
       font-size: 14px;
       line-height: 15px;
       color: #000000;
+      overflow: hidden;
+      white-space: wrap;
+      text-overflow: ellipsis;
+      width: 300px;
+      display: -webkit-box;
+      -webkit-line-clamp: 8; 
+      -webkit-box-orient: vertical;
     }
   }
 }
