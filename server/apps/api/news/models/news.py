@@ -11,7 +11,7 @@ class News(models.Model):
         return f"news/{self.title}/{self.image.name}"
 
     title = models.CharField(
-        max_length=127,
+        max_length=524,
         verbose_name=_("Заголовок"),
     )
 
