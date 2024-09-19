@@ -23,6 +23,11 @@
       </q-img>
       <p class="index-page__auth-data">{{ authStore.user?.lastName }} {{ authStore.user?.firstName?.charAt(0) }}. {{
         authStore.user?.surname?.charAt(0) }}.</p>
+      <p class="index-page__auth-data">
+        {{ (authStore.user?.lastName && authStore.user?.lastName?.length > 0) || (authStore.user?.firstName &&
+          authStore.user.firstName.length > 0) ?
+          `${authStore.user.lastName} ${authStore.user.firstName?.charAt(0)}.` : `${authStore.user?.username}` }}
+      </p>
     </div>
     <div class="column justify-center items-center q-mb-xl">
       <h1 class="index-page__main-head">#ЭКОСВЕТ</h1>
