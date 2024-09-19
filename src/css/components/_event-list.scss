@@ -1,12 +1,12 @@
-.events{
+.events {
   background-image: url("../assets/images/events_back.svg");
   background-repeat: no-repeat;
   margin-top: -1px;
   background-size: 1077px;
-  &__container{
+  &__container {
     width: 1300px;
   }
-  &__btn{
+  &__btn {
     width: 407px;
     height: 70px;
     background: linear-gradient(90deg, #3A9181 0%, #27685E 100%);
@@ -16,22 +16,22 @@
     line-height: 52px;
     min-height: 30px !important;
   }
-  &__scroll-btn{
+  &__scroll-btn {
     width: 50px;
     height: 50px;
     padding: 0;
   }
-  &__head{
+  &__head {
     color: #27685E;
     font-weight: 600;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     font-size: 72px;
   }
-  &__card-line{
+  &__card-line {
     width: 180px;
     background: rgba(0, 0, 0, 0.5);
   }
-  &__main-card{
+  &__main-card {
     width: 624px;
     height: 290px;
     background: #E1E1E1;
@@ -39,28 +39,30 @@
     border-style: solid;
     border-color: #76AE9B;
     border-radius: 50px;
-    &__img{
+    &__img {
       border-radius: 50px;
     }
-    &__button{
+    &__button {
       font-weight: 600;
       font-size: 18px;
       line-height: 20px;
       color: rgba(61, 121, 101, 0.75);
     }
-    &__section{
+    &__section {
       padding: 3px 5px;
     }
-    &__head{
+    &__head {
       font-weight: 600;
       font-size: 32px;
       line-height: 35px;
       color: #284F42;
       overflow: hidden;
-      white-space: nowrap;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
       text-overflow: ellipsis;
     }
-    &__description{
+    &__description {
       font-weight: 400;
       font-size: 20px;
       line-height: 22px;
@@ -69,9 +71,10 @@
       display: -webkit-box;
       -webkit-line-clamp: 6;
       -webkit-box-orient: vertical;
+      text-overflow: ellipsis;
     }
   }
-  &__card{
+  &__card {
     width: 294px;
     height: 400px;
     background: #E1E1E1;
@@ -79,13 +82,13 @@
     border-style: solid;
     border-color: #76AE9B;
     border-radius: 50px;
-    &__section{
+    &__section {
       padding: 2px;
     }
-    &__img{
+    &__img {
       border-radius: 50px;
     }
-    &__head{
+    &__head {
       width: 130px;
       font-weight: 600;
       font-size: 24px;
@@ -95,13 +98,13 @@
       white-space: nowrap;
       text-overflow: ellipsis;
     }
-    &__btn{
+    &__btn {
       font-weight: 600;
       font-size: 16px;
       line-height: 17px;
       color: rgba(61, 121, 101, 0.75);
     }
-    &__description{
+    &__description {
       overflow: hidden;
       display: -webkit-box;
       -webkit-line-clamp: 3;
@@ -109,7 +112,7 @@
     }
   }
 }
-.q-dialog__inner--minimized > div{
+.q-dialog__inner--minimized > div {
   max-width: 1065px;
   width: 1065px;
 }
