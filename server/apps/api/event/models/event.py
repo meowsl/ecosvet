@@ -13,7 +13,7 @@ class Event(models.Model):
         return f"events/{self.name}/{self.image.name}"
 
     name = models.CharField(
-        max_length=127,
+        max_length=256,
         verbose_name=_("Название")
     )
 

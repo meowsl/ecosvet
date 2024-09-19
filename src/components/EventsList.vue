@@ -52,8 +52,8 @@
                   class="events__card__img"
                   :src="event.image"
                   width="284px"
-                  height="250px"
-                  fit="contain"
+                  height="215px"
+                  fit="cover"
                 />
               </q-card-section>
               <div class="">
@@ -66,6 +66,12 @@
                 </div>
               </div>
             </q-card-section>
+            <q-btn
+              class="events__main-card__button absolute-bottom-right q-mr-md q-mb-sm"
+              no-caps
+              flat
+              @click="openPopup(event.id)"
+            >Подробнее</q-btn>
           </q-card>
         </template>
       </div>
