@@ -17,7 +17,7 @@
             </q-card-section>
             <div class="">
               <q-card-section class="events__main-card__head">
-                <p>{{ event.name }}</p>
+                <p>{{ event.name }}</p>                
               </q-card-section>
               <q-separator class="events__card-line q-ml-md"/>
               <q-card-section>
@@ -53,7 +53,7 @@
               </div>
             </div>
           </q-card-section>
-        </q-card>        
+        </q-card>
       </template>
       </div>
       <div class="row justify-center q-my-lg">
@@ -82,7 +82,7 @@
     transition-hide="slide-down"
     transition-duration="500"
   >
-    <EventDetail :event="eventDetailData"/>
+    <EventDetail :event="eventDetailData" :userEvent="userEvent"/>
   </q-dialog>
 
 </template>
@@ -91,6 +91,7 @@
 import { ref, PropType, onMounted } from 'vue';
 import EventDetail from "./EventDetail.vue";
 import { Event } from "src/models/event";
+import { UserEvent } from "src/models/auth";
 import EventsImg from "../assets/images/events-img.svg"
 import EarthIcon from "../assets/images/earth-icon.svg"
 import ScrollIcon from "../assets/images/scroll-btn.svg"
@@ -98,8 +99,9 @@ import { useEvent } from 'src/composables/useEvent'
 
 const popupVisible = ref<boolean>(false)
 const selectedEventId = ref<number | null>(null);
-const { getEventDetail } = useEvent()
+const { getEventDetail, getUserEvent } = useEvent()
 const eventDetailData = ref<Event | null>(null);
+const userEvent = ref<UserEvent |null>(null);
 
 const props = defineProps({
   events:{  
@@ -119,6 +121,7 @@ const openPopup = async (eventId: number) => {
   if (eventId !== undefined) {
     selectedEventId.value = eventId;
     const eventDetail = await getEventDetail(eventId)
+    userEvent.value = await getUserEvent()
     eventDetailData.value = eventDetail
     popupVisible.value = true;
   }

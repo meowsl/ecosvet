@@ -13,11 +13,11 @@
           fit="contain"
         />
         <div class="column q-ml-lg">
-          <p class="event-detail__title q-mt-xl">{{ props.event.name }}</p>
+          <p class="event-detail__title q-mt-xl">{{ props.event.name }}</p>          
           <p class="event-detail__data q-mt-sm">Дата: {{ props.event.date }}</p>
           <p class="event-detail__data q-mt-sm">Автор: {{ props.event.author }}</p>
-
-          <q-btn no-caps class="event-detail__btn q-mt-auto q-mb-md">Принять участие</q-btn>
+          <q-btn v-if="props.userEvent && isUserRegistered(props.event.name)" disable no-caps class="event-detail__btn q-mt-auto q-mb-md">Уже участвуете</q-btn>
+          <q-btn v-else no-caps class="event-detail__btn q-mt-auto q-mb-md" @click="onSubmit">Принять участие</q-btn>
         </div>
       </div>
       <div class="event-detail__section">
@@ -81,7 +81,10 @@ import { ref, defineProps, PropType } from 'vue'
 import { useQuasar } from 'quasar'
 import EventsImg from "../assets/images/events-img.svg"
 import { EventDetail } from "src/models/event";
+import { UserEvent } from "src/models/auth";
 import { isAuthorizedFunc } from "src/services/isAuth"
+import { useEvent } from 'src/composables/useEvent'
+const { eventJoin } = useEvent()
 
 const firstname = ref('')
 const lastname = ref('')
@@ -94,14 +97,24 @@ const props = defineProps({
   event: {
     type: Object as PropType<EventDetail>,
     required: true
+  },
+  userEvent: {
+    type: Array as PropType<UserEvent[]>,
+    required: true
   }
 })
-const onSubmit = () => {
-    // $q.notify({
-    //   color: 'red-5',
-    //   textColor: 'white',
-    //   icon: 'warning',
-    //   message: 'You need to accept the license and terms first'
-    // })
-}
+const isUserRegistered = (eventName: string) => {
+  return props.userEvent.some((event: UserEvent) => event.event === eventName);
+};
+const onSubmit = async () => {
+  try {
+    const userEventData: UserEvent = {
+      user: props.event.name,
+      event: props.event.name
+    };
+    await eventJoin(props.event.id, userEventData);
+  } catch (error) {
+    console.error(error);
+  }
+};
 </script>

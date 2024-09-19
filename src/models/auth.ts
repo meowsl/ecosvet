@@ -13,6 +13,11 @@ export interface UserReference {
   password?: string | undefined
 }
 
+export interface UserEvent {
+  user?: string | undefined
+  event?: string | undefined
+}
+
 export interface AuthState {
   user: user | null
 }
