@@ -78,7 +78,7 @@ onMounted(async () => {
 })
 
 const logout = async () => {
-  const result = await authStore.userLogout();
+  await authStore.userLogout();
   window.location.reload();
 }
 

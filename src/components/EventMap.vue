@@ -11,7 +11,10 @@
       height="350px"
       @ymapsready="initMap"
     >
-      <yandex-map-default-marker :settings="markerInfo" />
+      <yandex-map-default-marker
+        v-if="markerInfo"
+        :settings="markerInfo"
+      />
       <yandex-map-default-scheme-layer />
       <yandex-map-default-features-layer />
       <yandex-map-controls :settings="{ position: 'right' }">
@@ -34,11 +37,10 @@ import {
   YandexMapControls,
   YandexMapZoomControl
 } from 'vue-yandex-maps';
-import { settings } from 'cluster';
 
 const map = ref();
 
-const markerInfo = ref();
+const markerInfo = ref(null);
 
 const props = defineProps({
   address: {
@@ -67,7 +69,6 @@ async function geocodeAddress(address: string | any) {
 }
 
 async function initMap() {
-  const eventCoord = new Map();
   try {
     const coords: LngLat | null = await geocodeAddress(props.address);
     if (coords) {
@@ -82,14 +83,14 @@ async function initMap() {
 }
 
 onMounted(async () => {
-  initMap();
-
-
   const options = createYmapsOptions({
     apikey: 'c0d403ab-e5be-4049-908c-8122a58acf23',
   });
 
   await initYmaps(options);
+
+  // Вызываем initMap только после инициализации Ymaps
+  initMap();
 });
 </script>
 
