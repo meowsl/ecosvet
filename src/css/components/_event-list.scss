@@ -56,6 +56,9 @@
       font-size: 32px;
       line-height: 35px;
       color: #284F42;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
     &__description{
       font-weight: 400;
@@ -64,7 +67,7 @@
       color: #3D7965;
       overflow: hidden;
       display: -webkit-box;
-      -webkit-line-clamp: 6; 
+      -webkit-line-clamp: 6;
       -webkit-box-orient: vertical;
     }
   }
@@ -83,10 +86,14 @@
       border-radius: 50px;
     }
     &__head{
+      width: 130px;
       font-weight: 600;
       font-size: 24px;
       line-height: 28px;
       color: #284F42;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
     &__btn{
       font-weight: 600;
@@ -97,7 +104,7 @@
     &__description{
       overflow: hidden;
       display: -webkit-box;
-      -webkit-line-clamp: 3; 
+      -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
     }
   }

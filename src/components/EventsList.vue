@@ -17,14 +17,14 @@
             </q-card-section>
             <div class="">
               <q-card-section class="events__main-card__head">
-                <p>{{ event.name }}</p>                
+                <p>{{ event.name }}</p>
               </q-card-section>
               <q-separator class="events__card-line q-ml-md"/>
               <q-card-section>
                 <p class="events__main-card__description">{{ event.description }}</p>
               </q-card-section>
               <q-card-section class="row justify-end">
-                <q-btn class="events__main-card__button" no-caps flat @click="openPopup(event.id)">Подробнее</q-btn>
+                <q-btn class="events__main-card__button absolute-bottom-right q-mr-md q-mb-sm" no-caps flat @click="openPopup(event.id)">Подробнее</q-btn>
               </q-card-section>
             </div>
           </q-card-section>
@@ -104,7 +104,7 @@ const eventDetailData = ref<Event | null>(null);
 const userEvent = ref<UserEvent |null>(null);
 
 const props = defineProps({
-  events:{  
+  events:{
     type: Array as PropType<Event[]>,
     required: true
   }
