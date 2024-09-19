@@ -1,7 +1,13 @@
 <template>
   <div class="event-detail">
     <q-card-section class="absolute-right">
-      <q-btn icon="close" flat round dense v-close-popup />
+      <q-btn
+        icon="close"
+        flat
+        round
+        dense
+        v-close-popup
+      />
     </q-card-section>
     <div class="event-detail__card q-px-md">
       <div class="event-detail__container">
@@ -13,27 +19,43 @@
           fit="contain"
         />
         <div class="column q-ml-lg">
-          <p class="event-detail__title q-mt-xl">{{ props.event.name }}</p>          
+          <p class="event-detail__title q-mt-xl">{{ props.event.name }}</p>
           <p class="event-detail__data q-mt-sm">Дата: {{ props.event.date }}</p>
           <p class="event-detail__data q-mt-sm">Автор: {{ props.event.author }}</p>
-          <q-btn v-if="props.userEvent && isUserRegistered(props.event.name)" disable no-caps class="event-detail__btn q-mt-auto q-mb-md">Уже участвуете</q-btn>
-          <q-btn v-else no-caps class="event-detail__btn q-mt-auto q-mb-md" @click="onSubmit">Принять участие</q-btn>
+          <q-btn
+            v-if="props.userEvent && isUserRegistered(props.event.name)"
+            disable
+            no-caps
+            class="event-detail__btn q-mt-auto q-mb-md"
+          >Уже участвуете</q-btn>
+          <q-btn
+            v-else
+            no-caps
+            class="event-detail__btn q-mt-auto q-mb-md"
+            @click="onSubmit"
+          >Принять участие</q-btn>
         </div>
       </div>
       <div class="event-detail__section">
-        <q-separator class="event-detail__line q-my-md"/>
+        <q-separator class="event-detail__line q-my-md" />
         <div class="event-detail__description q-pt-none q-my-md">
           {{ props.event.description }}
         </div>
-        <q-separator class="event-detail__line  q-my-md"/>
+        <q-separator class="event-detail__line  q-my-md" />
         <div class="event-detail__place">
           <p class="event-detail__section-head q-mb-md">Место проведения</p>
-          <div class="event-detail__map"></div>
+          <EventMap :address="props.event.address" />
           <p class="event-detail__address q-my-sm">{{ props.event.address }} <br> {{ props.event.landmark }}</p>
         </div>
-        <q-separator class="event-detail__line  q-my-md"/>
-        <p v-if="!isAuth" class="event-detail__section-head q-mb-md">Принять участие</p>
-        <div v-if="!isAuth" class="">
+        <q-separator class="event-detail__line  q-my-md" />
+        <p
+          v-if="!isAuth"
+          class="event-detail__section-head q-mb-md"
+        >Принять участие</p>
+        <div
+          v-if="!isAuth"
+          class=""
+        >
           <q-form
             @submit="onSubmit"
             class="event-detail__form q-gutter-md row"
@@ -67,7 +89,12 @@
               class="event-detail__field"
             />
             <div class="q-ml-auto q-mr-md">
-              <q-btn class="event-detail__form-btn" no-caps label="Подтвердить" type="submit"/>
+              <q-btn
+                class="event-detail__form-btn"
+                no-caps
+                label="Подтвердить"
+                type="submit"
+              />
             </div>
           </q-form>
         </div>
@@ -84,6 +111,8 @@ import { EventDetail } from "src/models/event";
 import { UserEvent } from "src/models/auth";
 import { isAuthorizedFunc } from "src/services/isAuth"
 import { useEvent } from 'src/composables/useEvent'
+import EventMap from './EventMap.vue'
+
 const { eventJoin } = useEvent()
 
 const firstname = ref('')

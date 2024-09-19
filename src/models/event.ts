@@ -11,4 +11,5 @@ export interface EventDetail {
   address: string | undefined
   landmark: string | undefined
   author: string | undefined
+  description?: string | undefined
 }
